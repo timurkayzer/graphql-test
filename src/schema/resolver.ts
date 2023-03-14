@@ -33,6 +33,14 @@ export const resolver = {
             users.push(user);
 
             return user;
+        },
+
+        updateUserName: (parent: any, args: { updateUserName: Pick<User, 'id' | 'name'>; }) => {
+            const user = users.find(u => u.id == args.updateUserName.id);
+            if (!user) throw new Error("User not found");
+
+            user.name = args.updateUserName.name;
+            return user;
         }
     }
 };
